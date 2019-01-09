@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Wed Nov 14 15:27:34 JST 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Uwaseki\\Desktop\\source\\android-Camera2Basic-master\\Application\\build\\intermediates\\transforms\\dex\\release\\0
+0.path=classes.dex
+0.set=DEX
+count=1

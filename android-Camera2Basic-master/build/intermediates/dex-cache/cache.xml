@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.0.aar\e558ce8a2648eab3d97d9698e48d4b62\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="89172db744f643c670ee7f9620b39ed460bc23fb">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.0.aar\ae9d27863a4ba55d9305607d1a978eb4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="62e71cc187cfcb1ba382b05c5f39f5d903973656">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\8f16eb5d8081c5ce9b81594e67670e48\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.0.aar\9919d081e09ac13ef8705b3b595f6097\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="63b9cc88144f20f869dbd7dfb72a082000a57997">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.0.aar\de9f4a02958a432810ae73abc758d9cf\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e616b95568c5f38322799069485eb73f68ffec0a">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.0.aar\2012f94d9840e04c1a8a56dafc6e0637\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e7404d217654969776b5fa566df9a7f2c1b1c337">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.0.aar\1a465d2600b09dfe0634c43c25743900\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="cf7abe2a43ffb1d475e94d0877ef3abb95fff56e">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.0.0\a7782471b2a0de8fec071b8094a8aaf61c46ab70\support-annotations-27.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a7782471b2a0de8fec071b8094a8aaf61c46ab70">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.0.aar\2f9523211fd98d717c9a5ddae91e8e7a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f73f6af8b32299bb364178188dcfe50379ed0da7">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.0.aar\ff5018d7cb12542de02cefc3fc664881\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0e97fa8abc1a1a90087ce8b093d11f1a8e0f1214">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.0.aar\1e8be24190fc547f542a56ec115ceef4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="49e3859c5fa46728eed16dfd47b1e09d20e82f2e">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.0.aar\132da30c9d8a59d39c45bd453f4b607e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7103318ab8a16fe56a325b7554b088f4d49e4700">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.0.aar\c895ae344415250c866901148d751181\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9e3177fae918dbe4e58eccf197cfb56bfaf59803">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Uwaseki\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="21"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="C:\Users\Uwaseki\Desktop\source\android-Camera2Basic-master\Application\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,4 @@
+#Wed Nov 14 15:27:34 JST 2018
+base.0=C\:\\Users\\Uwaseki\\Desktop\\source\\android-Camera2Basic-master\\Application\\build\\intermediates\\transforms\\dex\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex
