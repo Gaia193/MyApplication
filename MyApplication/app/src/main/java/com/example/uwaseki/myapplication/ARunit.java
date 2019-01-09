@@ -2,6 +2,7 @@ package com.example.uwaseki.myapplication;
 //ARの表示を行う
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,6 +27,9 @@ public class ARunit extends View{
     private int dis;
     private ArrayList<ARData> list;
     private static final String TAG = "ARunit";
+
+    //音声再生関連(https://akira-watson.com/android/audio-player.html)
+    //AssetFileDescriptor afdescripter = getAssets().openFd(filePath);
 
     public ARunit(Context context, Cursor cursor) {
         super(context);
