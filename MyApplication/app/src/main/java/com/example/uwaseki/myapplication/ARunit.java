@@ -92,8 +92,9 @@ public class ARunit extends View{
 
             //方角計算（ラジアンを角度に）
             double angle = Math.atan2(dy, dx);
-            float degree = (float) Math.toDegrees(angle);
-            //degree = -degree + 90;
+            //float degree = (float) Math.toDegrees(angle);
+            float degree = (float) (angle * 180.0 / Math.PI);
+            degree = -degree + 90;
             if (degree < 0) degree = 360 + degree;
             pre_dire = dire;
             //向いている方位取得
