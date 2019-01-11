@@ -451,6 +451,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     play = true;
                     audioPlay();
                 }
+                else if(SoundTitle == null){
+                    //Log.i("soundtitle",SoundTitle);
+                    break;
+                }
                 else if(mediaPlayer.isPlaying() == false){
                     audioPlay();
                 }
