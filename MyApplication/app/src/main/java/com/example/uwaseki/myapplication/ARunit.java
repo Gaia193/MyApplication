@@ -27,7 +27,9 @@ public class ARunit extends View{
     private int dis;
     private ArrayList<ARData> list;
     private static final String TAG = "ARunit";
-    private static String SoundTitle = null;
+
+    //音声再生関連(https://akira-watson.com/android/audio-player.html)
+    //AssetFileDescriptor afdescripter = getAssets().openFd(filePath);
 
     public ARunit(Context context, Cursor cursor) {
         super(context);
@@ -50,7 +52,6 @@ public class ARunit extends View{
             data.info = cursor.getString(0);
             data.latitude = cursor.getInt(1);
             data.longitude = cursor.getInt(2);
-            data.sound = cursor.getString(3);
             list.add(data);
         } while (cursor.moveToNext());
     }
@@ -59,7 +60,6 @@ public class ARunit extends View{
         public String info;
         public int latitude;
         public int longitude;
-        public String sound;
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ARunit extends View{
             String info = data.info;
             int y = data.latitude;
             int x = data.longitude;
-            Log.d(TAG,"ARData "+info+" "+y+" "+x+"" +data.sound);
+            Log.d(TAG,"ARData "+info+" "+y+" "+x+"");
 
             lon = (int) MapsActivity.getLong();
             lat = (int) MapsActivity.getLat();
@@ -93,11 +93,6 @@ public class ARunit extends View{
 
             Log.d(TAG,"700以内 "+info+" "+distance+"");
 
-            if (distance < 300) {
-                SoundTitle = data.sound;
-                Log.i(TAG,"sound data"+SoundTitle);
-
-            }
 
             //方角計算（ラジアンを角度に）
             double angle = Math.atan2(dy, dx);
@@ -157,10 +152,6 @@ public class ARunit extends View{
 
         paint.setColor(Color.BLACK);
         canvas.drawText(text, left, top, paint);
-    }
-
-    public static String getSoundTitle(){
-        return SoundTitle;
     }
 }
 

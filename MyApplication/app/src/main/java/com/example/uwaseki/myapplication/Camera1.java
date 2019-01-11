@@ -3,6 +3,7 @@ package com.example.uwaseki.myapplication;
 import android.content.Context;
 import android.hardware.Camera;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -14,6 +15,7 @@ public class Camera1 extends SurfaceView implements SurfaceHolder.Callback{
     private SurfaceHolder SH;
     private Camera CM;
     public static final String TAG = MapsActivity.class.getSimpleName();
+
     public Camera1(Context context) {
         super(context);
 

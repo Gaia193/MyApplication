@@ -16,12 +16,10 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -39,20 +37,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Date;
 import java.util.List;
 
-import static com.example.uwaseki.myapplication.ARunit.getSoundTitle;
 import static java.sql.Types.NULL;
-
-//音声再生
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.content.res.AssetFileDescriptor;
-import android.widget.Toast;
-import java.io.IOException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, SensorEventListener, LocationListener, View.OnClickListener {
 
@@ -83,13 +68,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static double Longitude;
     private static double Latitude;
     private static float direction;
-
-
-    //音声再生関連(https://akira-watson.com/android/audio-player.html)
-    private MediaPlayer mediaPlayer;
-    private boolean play = false;
-    private String SoundTitle= null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -275,10 +253,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SQLiteOpenHelperEx helper = new SQLiteOpenHelperEx(this);
         db = helper.getWritableDatabase();
 
-        cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude", "sound"}, null, null, null, null, null);
+        cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude"}, null, null, null, null, null);
         if (cursor.getCount() < 1) {
             presetTable();
-            cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude", "sound"}, null, null, null, null, null);
+            cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude"}, null, null, null, null, null);
         }
     }
 
@@ -311,25 +289,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         values.put("info", "first gym west side");
         values.put("latitude", 38276102);
         values.put("longitude", 140752285);
-        values.put("sound", "amairo");
         db.insert(DB_TABLE, "", values);
         //4号棟ベランダ
         values.put("info", "4th building");
         values.put("latitude", 38275709);
         values.put("longitude", 140751810);
-        values.put("sound", "hakucyou");
         db.insert(DB_TABLE, "", values);
         //寮交差点
         values.put("info", "dormitory");
         values.put("latitude", 38277077);
         values.put("longitude", 140751622);
-        values.put("sound", "ifudoudou");
         db.insert(DB_TABLE, "", values);
         //安藤研究室
         values.put("info", "AndoLabo");
         values.put("latitude", 38276485);
         values.put("longitude", 140751868);
-        values.put("sound", "symphony7");
         db.insert(DB_TABLE, "", values);
     }
 
@@ -344,7 +318,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String sql = "create table if not exists " + DB_TABLE + "(info text, latitude numeric, longitude numeric, sound text)";
+            String sql = "create table if not exists " + DB_TABLE + "(info text, latitude numeric, longitude numeric)";
             db.execSQL(sql);
         }
 
@@ -369,112 +343,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d(TAG, "getDir direction="+direction+"");
         return direction;
     }
-
-    private boolean audioSetup(){
-        boolean fileCheck = false;
-
-        // インタンスを生成
-        mediaPlayer = new MediaPlayer();
-
-        //音楽ファイル名, あるいはパス
-        SoundTitle = getSoundTitle();
-        String filePath = SoundTitle +".mp3";
-
-        // assetsから mp3 ファイルを読み込み
-        try(AssetFileDescriptor afdescripter = getAssets().openFd(filePath);)
-        {
-            // MediaPlayerに読み込んだ音楽ファイルを指定
-            mediaPlayer.setDataSource(afdescripter.getFileDescriptor(),
-                    afdescripter.getStartOffset(),
-                    afdescripter.getLength());
-            // 音量調整を端末のボタンに任せる
-            setVolumeControlStream(AudioManager.STREAM_MUSIC);
-            mediaPlayer.prepare();
-            fileCheck = true;
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-        return fileCheck;
-    }
-
-    private void audioPlay() {
-
-        if (mediaPlayer == null) {
-            // audio ファイルを読出し
-            if (audioSetup()){
-                Toast.makeText(getApplication(), "Rread audio file", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(getApplication(), "Error: read audio file", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-        else{
-            // 繰り返し再生する場合
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-            // リソースの解放
-            mediaPlayer.release();
-        }
-
-        // 再生する
-        mediaPlayer.start();
-
-        // 終了を検知するリスナー
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                Log.d("debug","end of audio");
-                audioStop();
-            }
-        });
-    }
-
-    private void audioStop() {
-        // 再生終了
-        mediaPlayer.stop();
-        // リセット
-        mediaPlayer.reset();
-        // リソースの解放
-        mediaPlayer.release();
-
-        mediaPlayer = null;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.i("audio","pressed");
-                if(play == false) {
-                    play = true;
-                    audioPlay();
-                }
-                else if(SoundTitle == null){
-                    //Log.i("soundtitle",SoundTitle);
-                    break;
-                }
-                else if(mediaPlayer.isPlaying() == false){
-                    audioPlay();
-                }
-                else if(mediaPlayer.isPlaying() == true){
-                    audioStop();
-                    play = false;
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                Log.i("audio","released");
-                break;
-            case MotionEvent.ACTION_MOVE:
-                // something to do
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                // something to do
-                break;
-        }
-
-        return false;
-    }
-
 }
