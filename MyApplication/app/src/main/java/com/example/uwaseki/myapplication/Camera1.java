@@ -20,6 +20,8 @@ public class Camera1 extends SurfaceView implements SurfaceHolder.Callback{
         SH = getHolder();
         SH.addCallback(this);
         SH.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+        //ここでonclickやればいける？
     }
 
     @Override

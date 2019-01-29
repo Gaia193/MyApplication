@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -53,6 +54,9 @@ import android.widget.Button;
 import android.content.res.AssetFileDescriptor;
 import android.widget.Toast;
 import java.io.IOException;
+
+//画像関連
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, SensorEventListener, LocationListener, View.OnClickListener {
 
@@ -90,6 +94,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean play = false;
     private String SoundTitle= null;
 
+    //画像関連
+    private TextView textview;
+    private boolean flag = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +122,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         listMag = sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD);
         listAcc = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
+
         //カメラビュー
+        //View camera = new Camera1(this);
         setContentView(new Camera1(this));
+
         //ARコンテンツをほかのビューと重ねて表示
         addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -129,6 +140,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+        //ボタン配置
+        Button button1 = findViewById(R.id.button1);
+        //textview = findViewById(R.id.text_view);
+        //button1.setOnClickListener();
+
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         sensorManager.registerListener(this, listMag.get(0), SensorManager.SENSOR_DELAY_NORMAL);
@@ -303,6 +320,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "�e�L�X�g���o�^����܂���", Toast.LENGTH_LONG).show();
         }
         */
+/*
+        switch(v.getId()){
+            case R.id.button1:
+                //ボタンが押されたら
+                Log.d(TAG, "onClick: hit");
+                break;
+        }
+*/
     }
 
     private void presetTable() {
