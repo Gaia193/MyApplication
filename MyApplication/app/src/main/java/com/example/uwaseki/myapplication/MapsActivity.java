@@ -22,10 +22,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,6 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.v(TAG, "clicked");
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         //マップの表示
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -125,7 +128,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //カメラビュー
         //View camera = new Camera1(this);
-        setContentView(new Camera1(this));
+        //setContentView(new Camera1(this));
+
+        setContentView(R.layout.activity_camera);
+        LinearLayout camera = (LinearLayout)findViewById(R.id.surfaceView);
+        Camera1 camera_view = new Camera1(this);
+        camera.addView(camera_view);
 
         //ARコンテンツをほかのビューと重ねて表示
         addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
@@ -142,7 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //ボタン配置
-        Button button1 = findViewById(R.id.button1);
+        //Button button1 = findViewById(R.id.button1);
         //textview = findViewById(R.id.text_view);
         //button1.setOnClickListener();
 
