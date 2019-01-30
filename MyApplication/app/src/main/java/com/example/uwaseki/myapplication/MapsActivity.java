@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,9 +25,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +46,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.uwaseki.myapplication.ARunit.getImageTitle;
 import static com.example.uwaseki.myapplication.ARunit.getSoundTitle;
 import static java.sql.Types.NULL;
 
@@ -58,7 +63,10 @@ import android.widget.Toast;
 import java.io.IOException;
 
 //画像関連
-
+import android.widget.ImageView;
+import java.io.InputStream;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, SensorEventListener, LocationListener, View.OnClickListener {
 
@@ -98,8 +106,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //画像関連
     private TextView textview;
-    private boolean flag = false;
-
+    private boolean image = false;
+    private String ImageTitle = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,10 +138,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //View camera = new Camera1(this);
         //setContentView(new Camera1(this));
 
-        setContentView(R.layout.activity_camera);
-        LinearLayout camera = (LinearLayout)findViewById(R.id.surfaceView);
-        Camera1 camera_view = new Camera1(this);
-        camera.addView(camera_view);
+        //LinearLayout camera = (LinearLayout)findViewById(R.id.surfaceView);
+        //Camera1 camera_view = new Camera1(this);
+        //addContentView(camera_view, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
+        //setContentView(R.id.soundbutton);
+        setContentView(new Camera1(this));
+        View view = getLayoutInflater().inflate(R.layout.activity_camera, null);
+        addContentView(view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT,FrameLayout.LayoutParams.FILL_PARENT));
 
         //ARコンテンツをほかのビューと重ねて表示
         addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
@@ -300,10 +311,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SQLiteOpenHelperEx helper = new SQLiteOpenHelperEx(this);
         db = helper.getWritableDatabase();
 
-        cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude", "sound"}, null, null, null, null, null);
+        cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude", "sound" , "image"}, null, null, null, null, null);
         if (cursor.getCount() < 1) {
             presetTable();
-            cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude", "sound"}, null, null, null, null, null);
+            cursor = db.query(DB_TABLE, new String[]{"info", "latitude", "longitude", "sound", "image"}, null, null, null, null, null);
         }
     }
 
@@ -327,14 +338,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             editText.setText("");
             Toast.makeText(this, "�e�L�X�g���o�^����܂���", Toast.LENGTH_LONG).show();
         }
-        */
-/*
-        switch(v.getId()){
-            case R.id.button1:
-                //ボタンが押されたら
-                Log.d(TAG, "onClick: hit");
-                break;
-        }
 */
     }
 
@@ -345,24 +348,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         values.put("latitude", 38276102);
         values.put("longitude", 140752285);
         values.put("sound", "amairo");
+        values.put("image", "first_gym");
         db.insert(DB_TABLE, "", values);
         //4号棟ベランダ
         values.put("info", "4th building");
         values.put("latitude", 38275709);
         values.put("longitude", 140751810);
         values.put("sound", "hakucyou");
+        values.put("image", "4th_building");
         db.insert(DB_TABLE, "", values);
         //寮交差点
         values.put("info", "dormitory");
         values.put("latitude", 38277077);
         values.put("longitude", 140751622);
         values.put("sound", "ifudoudou");
+        values.put("image", "dormitory");
         db.insert(DB_TABLE, "", values);
         //安藤研究室
         values.put("info", "AndoLabo");
         values.put("latitude", 38276485);
         values.put("longitude", 140751868);
         values.put("sound", "symphony7");
+        values.put("image", "AndoLabo");
         db.insert(DB_TABLE, "", values);
     }
 
@@ -377,7 +384,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String sql = "create table if not exists " + DB_TABLE + "(info text, latitude numeric, longitude numeric, sound text)";
+            String sql = "create table if not exists " + DB_TABLE + "(info text, latitude numeric, longitude numeric, sound text, image text)";
             db.execSQL(sql);
         }
 
@@ -475,39 +482,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mediaPlayer = null;
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.i("audio","pressed");
-                if(play == false) {
-                    play = true;
-                    audioPlay();
-                }
-                else if(SoundTitle == null){
-                    //Log.i("soundtitle",SoundTitle);
-                    break;
-                }
-                else if(mediaPlayer.isPlaying() == false){
-                    audioPlay();
-                }
-                else if(mediaPlayer.isPlaying() == true){
-                    audioStop();
-                    play = false;
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                Log.i("audio","released");
-                break;
-            case MotionEvent.ACTION_MOVE:
-                // something to do
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                // something to do
-                break;
+    public void onClick1(View v){
+        Log.i("audio","pressed");
+        if(play == false) {
+            play = true;
+            audioPlay();
         }
-
-        return false;
+        else if(SoundTitle == null){
+            //Log.i("soundtitle",SoundTitle);
+        }
+        else if(mediaPlayer.isPlaying() == false){
+            audioPlay();
+        }
+        else if(mediaPlayer.isPlaying() == true){
+            audioStop();
+            play = false;
+        }
     }
 
+    public void onClick2(View v){
+        Log.i("image","pressed");
+        ImageTitle = getImageTitle();
+        if(ImageTitle != null){
+            Toast.makeText(getApplication(), "loaded image file", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplication(), "Error: loading image file", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(image == false){
+            //画像表示
+            DrawImage();
+            image = true;
+        }
+        else if(image == true){
+            //元の画面に戻す
+            setContentView(new Camera1(this));
+            View view = getLayoutInflater().inflate(R.layout.activity_camera, null);
+            addContentView(view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT,FrameLayout.LayoutParams.FILL_PARENT));
+            addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
+            image = false;
+        }
+    }
+
+    public void DrawImage(){
+        ImageView imageView = findViewById(R.id.imageview);
+        AssetManager assets = getResources().getAssets();
+        String filePath = ImageTitle + ".jpg";
+        // try-with-resources
+        try (InputStream istream = assets.open(filePath)){
+            Bitmap bitmap = BitmapFactory.decodeStream(istream);
+            imageView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

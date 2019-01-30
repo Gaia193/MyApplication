@@ -28,6 +28,7 @@ public class ARunit extends View{
     private ArrayList<ARData> list;
     private static final String TAG = "ARunit";
     private static String SoundTitle = null;
+    private static String ImageTitle = null;
 
     public ARunit(Context context, Cursor cursor) {
         super(context);
@@ -51,6 +52,7 @@ public class ARunit extends View{
             data.latitude = cursor.getInt(1);
             data.longitude = cursor.getInt(2);
             data.sound = cursor.getString(3);
+            data.image = cursor.getString(4);
             list.add(data);
         } while (cursor.moveToNext());
     }
@@ -60,6 +62,7 @@ public class ARunit extends View{
         public int latitude;
         public int longitude;
         public String sound;
+        public String image;
     }
 
     @Override
@@ -95,8 +98,9 @@ public class ARunit extends View{
 
             if (distance < 300) {
                 SoundTitle = data.sound;
+                ImageTitle = data.image;
                 Log.i(TAG,"sound data"+SoundTitle);
-
+                Log.i(TAG,"image data"+ImageTitle);
             }
 
             //方角計算（ラジアンを角度に）
@@ -161,6 +165,10 @@ public class ARunit extends View{
 
     public static String getSoundTitle(){
         return SoundTitle;
+    }
+
+    public static String getImageTitle(){
+        return ImageTitle;
     }
 }
 
