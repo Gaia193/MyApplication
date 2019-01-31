@@ -67,11 +67,12 @@ public class ARunit extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
+        float mindis = 99999;
+
         Paint paint = new Paint();
         paint.setAntiAlias(true);
 
         for (int i = 0; i < list.size(); i++) {
-
             ARData data = list.get(i);
             String info = data.info;
             int y = data.latitude;
@@ -97,13 +98,18 @@ public class ARunit extends View{
             Log.d(TAG,"700以内 "+info+" "+distance+"");
 
             if (distance < 300) {
-                SoundTitle = data.sound;
-                ImageTitle = data.image;
-                Log.i(TAG,"sound data"+SoundTitle);
-                Log.i(TAG,"image data"+ImageTitle);
+                if(mindis > distance) {
+                    mindis = distance;
+                    SoundTitle = data.sound;
+                    ImageTitle = data.image;
+                    Log.i(TAG,"sound data"+SoundTitle);
+                    Log.i(TAG,"image data"+ImageTitle);
+                }
             }
 
-            //方角計算（ラジアンを角度に）
+
+
+            //方角計算（ラジアンを角度に） ターゲットの方位
             double angle = Math.atan2(dy, dx);
             //float degree = (float) Math.toDegrees(angle);
             float degree = (float) (angle * 180.0 / Math.PI);
@@ -112,6 +118,7 @@ public class ARunit extends View{
             pre_dire = dire;
             //向いている方位取得
             dire = MapsActivity.getDir();
+            dire = (dire + pre_dire)/2;
             float sub = degree - dire;
             if (sub < -180.0) sub += 360;
             if (sub > 180.0) sub -= 360;
@@ -124,9 +131,18 @@ public class ARunit extends View{
                 paint.setTextSize(textSize);
                 //文字数
                 float textWidth = paint.measureText(info);
-                float diff = (sub / (30)) / 2;
-                float left = (dis / 2 + dis * diff) - (textWidth / 2);
-                drawBalloonText(canvas, paint, info, left, 55);
+                //float diff = (sub / (30)) / 2;
+                float pos = canvas.getWidth()/2 - textSize;
+                if(Math.abs(sub) < 10){
+                    pos = canvas.getWidth()/2 - textSize;
+                }
+                else if(sub < 0){
+                    pos = canvas.getWidth()/6;
+                }
+                else if(sub > 0){
+                    pos = canvas.getWidth()/6 * 4;
+                }
+                drawBalloonText(canvas, paint, info, pos, 55);
             }
         }
         try{
