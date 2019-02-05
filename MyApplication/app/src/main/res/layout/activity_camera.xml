@@ -18,7 +18,7 @@
         android:id="@+id/imagebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|left"
         android:layout_marginLeft="100dp"
         android:onClick="onClick2"
         android:text="画像" />
@@ -27,5 +27,13 @@
         android:id="@+id/imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/mapbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:onClick="onClick3"
+        android:text="マップ" />
 
 </FrameLayout>
