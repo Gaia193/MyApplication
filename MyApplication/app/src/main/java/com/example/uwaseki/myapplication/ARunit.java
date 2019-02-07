@@ -23,7 +23,7 @@ public class ARunit extends View{
     int lon;
     int lat;
     private int ang = 30;
-    private float range = 50;
+    private float range = 80;
     private int dis;
     private ArrayList<ARData> list;
     private static final String TAG = "ARunit";
@@ -142,7 +142,7 @@ public class ARunit extends View{
                 else if(sub > 0){
                     pos = canvas.getWidth()/6 * 4;
                 }
-                drawBalloonText(canvas, paint, info, pos, 55);
+                drawBalloonText(canvas, paint, info, pos, (float)(textSize * 1.5));
             }
         }
         try{

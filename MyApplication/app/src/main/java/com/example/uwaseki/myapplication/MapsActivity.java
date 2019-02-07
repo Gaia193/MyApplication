@@ -445,10 +445,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mediaPlayer == null) {
             // audio ファイルを読出し
             if (audioSetup()){
-                Toast.makeText(getApplication(), "Rread audio file", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "音声再生開始", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(getApplication(), "Error: read audio file", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "再生できる音声がありません", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -482,6 +482,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mediaPlayer.release();
 
         mediaPlayer = null;
+        Toast.makeText(getApplication(), "音声再生停止", Toast.LENGTH_SHORT).show();
     }
 
     public void onClick1(View v){
@@ -506,10 +507,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i("image","pressed");
         ImageTitle = getImageTitle();
         if(ImageTitle != null){
-            Toast.makeText(getApplication(), "loaded image file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "画像表示", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(getApplication(), "Error: loading image file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "表示できる画像がありません", Toast.LENGTH_SHORT).show();
             return;
         }
         if(image == false){
@@ -524,6 +525,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             addContentView(view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT,FrameLayout.LayoutParams.FILL_PARENT));
             addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
             image = false;
+            Toast.makeText(getApplication(), "画像表示終了", Toast.LENGTH_SHORT).show();
         }
     }
 
