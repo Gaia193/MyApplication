@@ -8,10 +8,12 @@
     tools:context="com.example.uwaseki.myapplication.MapsActivity">
 
     <Button
-    android:text="button1"
-    android:id="@+id/button1"
+    android:text="カメラ"
+    android:id="@+id/camerabutton"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|right"
+    android:onClick="onClick4" />
 
     <TextView
         android:id="@+id/text_view"

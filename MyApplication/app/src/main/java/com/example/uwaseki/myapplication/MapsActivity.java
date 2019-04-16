@@ -133,7 +133,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         listMag = sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD);
         listAcc = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
-
+/*
         //カメラビュー
         //View camera = new Camera1(this);
         //setContentView(new Camera1(this));
@@ -169,7 +169,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         sensorManager.registerListener(this, listMag.get(0), SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(this, listAcc.get(0), SensorManager.SENSOR_DELAY_NORMAL);
-
+*/
     }
 
 
@@ -233,6 +233,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sensorManager.unregisterListener(this);
         super.onPause();
     }
+
 
     @Override
     public void onStop() {
@@ -341,6 +342,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 */
     }
 
+
     private void presetTable() {
         ContentValues values = new ContentValues();
         //第1体育館西側
@@ -443,10 +445,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mediaPlayer == null) {
             // audio ファイルを読出し
             if (audioSetup()){
-                Toast.makeText(getApplication(), "Rread audio file", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "音声再生開始", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(getApplication(), "Error: read audio file", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "再生できる音声がありません", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -480,6 +482,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mediaPlayer.release();
 
         mediaPlayer = null;
+        Toast.makeText(getApplication(), "音声再生停止", Toast.LENGTH_SHORT).show();
     }
 
     public void onClick1(View v){
@@ -504,10 +507,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i("image","pressed");
         ImageTitle = getImageTitle();
         if(ImageTitle != null){
-            Toast.makeText(getApplication(), "loaded image file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "画像表示", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(getApplication(), "Error: loading image file", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "表示できる画像がありません", Toast.LENGTH_SHORT).show();
             return;
         }
         if(image == false){
@@ -522,6 +525,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             addContentView(view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT,FrameLayout.LayoutParams.FILL_PARENT));
             addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
             image = false;
+            Toast.makeText(getApplication(), "画像表示終了", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -536,5 +540,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onClick3(View v){
+        recreate();
+    }
+
+    public void onClick4(View v){
+        setContentView(new Camera1(this));
+        View view = getLayoutInflater().inflate(R.layout.activity_camera, null);
+        addContentView(view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT,FrameLayout.LayoutParams.FILL_PARENT));
+
+        //ARコンテンツをほかのビューと重ねて表示
+        addContentView(arView, new WindowManager.LayoutParams(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT));
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        //ボタン配置
+        //Button button1 = findViewById(R.id.button1);
+        //textview = findViewById(R.id.text_view);
+        //button1.setOnClickListener();
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+        sensorManager.registerListener(this, listMag.get(0), SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, listAcc.get(0), SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
